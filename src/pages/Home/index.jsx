@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-// import './index.css';
+import { Button, Card, Label } from 'storybook-project/dist';
 import styles from './index.css';
 
 export default class Home extends React.Component {
@@ -12,6 +12,9 @@ export default class Home extends React.Component {
         <div className={styles.customHome} >
           <Link href="a" to="/somethingNotFound"> Go to Not Found page! </Link>
         </div>
+        <Button text="Press me!" />
+        <Card />
+        <Label>Label</Label>
       </div>
     );
   }
