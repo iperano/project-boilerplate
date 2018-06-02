@@ -13,7 +13,6 @@ export default class Home extends React.Component {
           <Link href="a" to="/somethingNotFound"> Go to Not Found page! </Link>
         </div>
         <Button text="Press me!" />
-        <Card />
         <Label>Label</Label>
       </div>
     );
