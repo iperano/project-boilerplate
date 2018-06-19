@@ -1,4 +1,4 @@
-export const increase = () => ({
+export const increase = value => ({
   type: 'INCREASE',
-  value: 1,
+  value,
 });
