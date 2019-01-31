@@ -51,6 +51,6 @@
     "react-router-redux": "^4.0.8",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",
-    "storybook-project": "github:davidabram/storybook-project"
+    "storybook-project": "github:iperano/storybook-project"
   }
 }
