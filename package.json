@@ -9,7 +9,7 @@
     "watch": "webpack --watch -d",
     "dev": "webpack-dev-server"
   },
-  "author": "David Abram",
+  "author": "Ivan P",
   "license": "ISC",
   "devDependencies": {
     "babel-core": "^6.26.0",
