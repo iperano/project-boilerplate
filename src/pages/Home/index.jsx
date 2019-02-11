@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import styles from './index.css';
 import { increase, setWord } from './actions';
 
+import { Button } from 'storybook-project/dist/';
+
 class Home extends React.Component {
 
   constructor(props) {
@@ -31,6 +33,7 @@ class Home extends React.Component {
     return (
       <div className="home">
         <h1> Hello World! </h1>
+        <Button text="Can't Press me!" disabled={true}></Button>
         <span>{this.props.number}</span>
         <button onClick={this.props.increase1}>+1</button>
         <button onClick={this.props.increase100}>+100</button>
