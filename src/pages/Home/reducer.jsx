@@ -3,7 +3,6 @@ export const homeReducer = (state = { number: 0, word: '', beers: [], cardevents
     case 'SET-CARD':
       const currentCardEvents = state.cardevents.slice();
       currentCardEvents.push(action.objCard);
-      //return Object.assign({}, state, { cardevents: currentCardEvents });
       return {
         ...state,
         cardevents: currentCardEvents,

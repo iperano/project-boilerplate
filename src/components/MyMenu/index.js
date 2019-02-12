@@ -10,14 +10,14 @@ export default class MyMenu extends React.Component {
                 [{
                   id: 1,
                   content: 'My favorite beers',
-                  href: '/Favorites',
+                  href: '/MyFavorites',
                   active: this.props.active == 1,
                   number: this.props.favoritesCount,
                 },
                 {
                   id: 2,
                   content: 'My Shopping Cart',
-                  href: '/Cart',
+                  href: '/MyCart',
                   number: this.props.cartCount,
                   active: this.props.active == 2,
                 },

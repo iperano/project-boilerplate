@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import styles from './index.css';
 import { setCardEvents, increase, setWord, showPopup, removePopup} from './actions';
 
-import { Button } from 'storybook-project/dist/';
+
 import { Footer } from 'storybook-project/dist/';
 import { Header } from 'storybook-project/dist/';
 import { Navigation } from 'storybook-project/dist/';
@@ -14,7 +14,7 @@ import MyPopup from '../../components/MyPopup';
 import MyMenu from '../../components/MyMenu';
 
 
-const beersList = require('../App/db/beers');
+const beersList = require('../App/beers');
 
 const links = [
   {
@@ -52,7 +52,7 @@ const page_links = [
   },
   {
     id: 2,
-    content: <a href="/About">About</a>,
+    content: <a href="https://github.com/iperano/project-boilerplate">Source</a>,
     
   },
 ];
@@ -73,9 +73,7 @@ class Home extends React.Component {
   setPopup(beer) {
     this.props.showPopup(beer);
   }
-  removePopup() {
-    this.props.removePopup();
-  }
+
 
   updateWord(event) {
       /*this.setState({
@@ -90,23 +88,18 @@ class Home extends React.Component {
   }
 
   addFavorites(beerId) {
-    // TODO: provjera da li id postoji u favoritima:
-    // ako postoji maknuti
-    // ako ne postoji staviti u favorite
-
-    // kreiranje objekta
     const objCard = {
       id: beerId,
-      type: 'FAVORITES',
+      type: 'MYFAVORITES',
     };
-    // promjena propsa
+
     this.props.setCardEvents(objCard);
   }
 
   addCart(beerId) {
     const objCard = {
       id: beerId,
-      type: 'CART',
+      type: 'MYCART',
     };
     this.props.setCardEvents(objCard);
   }
@@ -120,19 +113,19 @@ class Home extends React.Component {
         name={beer.name}
         tagline={beer.tagline}
         description={beer.description}
-        iconFavorites="/icons/star-empty.png"
-        iconFavorites= "/icons/star-empty.png"
+        iconFavorites={this.props.cardevents.filter(e => e.id == beer.id && e.type == 'MYFAVORITES').length > 0 === true ? "/icons/star-full.png" : "/icons/star-empty.png" }
+        
         iconCart="/icons/plus.png"
         iconDetails="/icons/info.png"
-        onClickFavorites={this.props.increase1}//{() =>{this.addFavorites(beer.id)}}
+        onClickFavorites={() =>{this.addFavorites(beer.id)}}
         onClickCart={() =>{this.addCart(beer.id)}}
         onClickDetails={() =>{ this.setPopup(beer)}}
       />));
       
 
 
-      const favoritesCount = this.props.cardevents.filter(e => e.type == 'FAVORITES').length > 0 === true ? this.props.cardevents.filter(e => e.type == 'FAVORITES').length : ''; 
-      const cartCount = this.props.cardevents.filter(e => e.type == 'CART').length > 0 === true ? this.props.cardevents.filter(e => e.type == 'CART').length : '';
+      const favoritesCount = this.props.cardevents.filter(e => e.type == 'MYFAVORITES').length > 0 === true ? this.props.cardevents.filter(e => e.type == 'MYFAVORITES').length : ''; 
+      const cartCount = this.props.cardevents.filter(e => e.type == 'MYCART').length > 0 === true ? this.props.cardevents.filter(e => e.type == 'MYCART').length : '';
 
     
     return (
@@ -144,39 +137,20 @@ class Home extends React.Component {
         text="Duff Brewery" />
         <Navigation links={page_links} />
       </div>
-      <div>
-      Favorites : <span>{this.props.number} </span>
-      </div>
-      <div>
-      Shopping cart : <span>{this.props.number}</span>
-      </div>
         <div className={styles.content}>
           <Main>{cards}</Main>
         </div>
 
 
 
-        <span>{this.props.number}</span>
-        <button onClick={this.props.increase1}>+1</button>
-        <button onClick={this.props.increase100}>+100</button>
-        <button onClick={this.printA}>printA</button>
-            <br />
-            <input value={this.props.word} onChange={this.updateWord} />
-            <br />
-            {this.state.word}
-            <br />
-            {this.props.word}
         <h4>Links:</h4>
-        <div className={styles.customHome} >
-          <Link href="a" to="/somethingNotFound"> Go to Not Found page! </Link>
-        </div>
-        <div className={styles.customHome} >
-          <Link href="a" to="/about"> Go to About page! </Link>
-          
-        </div>
+        
 
 
-        <MyMenu favoritesCount={favoritesCount} cartCount={cartCount} />
+        <MyMenu 
+          favoritesCount={favoritesCount}
+          cartCount={cartCount} 
+        />
 
         <div><Footer links={links} text="Duff Brewery" /></div>
        
