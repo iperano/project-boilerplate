@@ -2,14 +2,19 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import styles from './index.css';
-import { increase, setWord } from './actions';
+import { increase, setWord, showPopup, removePopup} from './actions';
 
 import { Button } from 'storybook-project/dist/';
 import { Footer } from 'storybook-project/dist/';
 import { Header } from 'storybook-project/dist/';
-import { MyFooter } from '../../components/MyFooter/';
-import { MyNavigation } from '../../components/MyNavigation/';
+import { Navigation } from 'storybook-project/dist/';
+import { Card } from 'storybook-project/dist/';
+import { Main } from 'storybook-project/dist/';
+import MyPopup from '../../components/MyPopup';
+import MyMenu from '../../components/MyMenu';
 
+
+const beersList = require('../App/db/beers');
 
 const links = [
   {
@@ -39,6 +44,19 @@ const links = [
   },
 ];
 
+const page_links = [
+  {
+    id: 1,
+    content: <a href="/Home">Home</a>,
+    active: true,
+  },
+  {
+    id: 2,
+    content: <a href="/About">About</a>,
+    
+  },
+];
+
 class Home extends React.Component {
 
 
@@ -46,9 +64,17 @@ class Home extends React.Component {
     super(props);
     this.printA = this.printA.bind(this);
     this.updateWord = this.updateWord.bind(this);
+    this.setPopup = this.setPopup.bind(this);
     this.state = {
         word: props.word,
     }
+  }
+
+  setPopup(beer) {
+    this.props.showPopup(beer);
+  }
+  removePopup() {
+    this.props.removePopup();
   }
 
   updateWord(event) {
@@ -63,17 +89,65 @@ class Home extends React.Component {
     console.log(this.props.abc);
   }
 
+  addFavorites(beerId) {
+    // TODO: provjera da li id postoji u favoritima:
+    // ako postoji maknuti
+    // ako ne postoji staviti u favorite
+
+    // kreiranje objekta
+    const objCard = {
+      id: beerId,
+      type: 'FAVORITES',
+    };
+    // promjena propsa
+    this.props.setCardEvents(objCard);
+  }
+
+  addCart(beerId) {
+    const objCard = {
+      id: beerId,
+      type: 'CART',
+    };
+    this.props.setCardEvents(objCard);
+  }
+
   render() {
+
+    const cards = beersList.map(beer =>
+      (<Card
+        id={beer.id}
+        imgUrl={beer.image_url}
+        name={beer.name}
+        tagline={beer.tagline}
+        description={beer.description}
+        iconFavorites="/icons/star-empty.png"
+        iconFavorites= "/icons/star-empty.png"
+        iconCart="/icons/plus.png"
+        iconDetails="/icons/info.png"
+        onClickFavorites={this.props.increase1}//{() =>{this.addFavorites(beer.id)}}
+        onClickCart={() =>{this.addCart(beer.id)}}
+        onClickDetails={() => this.setPopup(beer)}
+      />));
+      
+
+
+      const favoritesCount = this.props.cardevents.filter(e => e.type == 'FAVORITES').length > 0 === true ? this.props.cardevents.filter(e => e.type == 'FAVORITES').length : ''; 
+      const cartCount = this.props.cardevents.filter(e => e.type == 'CART').length > 0 === true ? this.props.cardevents.filter(e => e.type == 'CART').length : '';
+
+    
     return (
       <div className="home">
       <Header
         imgUrl="https://seeklogo.com/images/D/duff-beer-logo-3AA4218F1D-seeklogo.com.png"
         class="" 
-        text="Duff Brewery">
-      </Header>;
+        text="Duff Brewery" />
+        <Navigation links={page_links} />
+        <div className={styles.content}>
+          <Main>{cards}</Main>
+        </div>
 
-        {/* <h1> Hello World! </h1> */}
-        <Button text="Can't Press me!" disabled={false}></Button>
+
+
         <span>{this.props.number}</span>
         <button onClick={this.props.increase1}>+1</button>
         <button onClick={this.props.increase100}>+100</button>
@@ -92,7 +166,14 @@ class Home extends React.Component {
           <Link href="a" to="/about"> Go to About page! </Link>
           
         </div>
+
+
+        <MyMenu favoritesCount={favoritesCount} cartCount={cartCount} />
+
         <div><Footer links={links} text="Duff Brewery" /></div>
+       
+       
+        
         
 
       </div>
@@ -101,15 +182,21 @@ class Home extends React.Component {
 }
 
 const mapStateToProps = state => ({
+  beers: state.home.beers,
+  cardevents: state.home.cardevents,
   number: state.home.number,
   abc: 3,
   word: state.home.word,
+  popup: state.home.popup,
 });
 
 const mapDispatchProps = dispatch => ({
+  setCardEvents: (objCard) => dispatch(setCardEvents(objCard)),
   increase1: () => dispatch(increase(1)),
   increase100: () => dispatch(increase(100)),
   setWord: (word) => dispatch(setWord(word)),
+  showPopup: beer => dispatch(showPopup(beer)),
+  removePopup: () => dispatch(removePopup()),
 });
 
 export default connect(

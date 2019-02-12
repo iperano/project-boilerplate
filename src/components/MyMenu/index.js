@@ -34,7 +34,7 @@ export default class MyMenu extends React.Component {
   }
 }
 
-BeerMenu.propTypes = {
+MyMenu.propTypes = {
     favoritesCount: PropTypes.string,
     cartCount: PropTypes.string,
     active: PropTypes.integer,

@@ -7,15 +7,19 @@ export default class MyNavigation extends React.Component {
     const links = [
       {
         id: 1,
-        content: <a href="/Home">Home</a>,
+        content: <a href="/Home">Početna</a>,
         active: this.props.active == 1,
       },
       {
         id: 2,
-        content: <a href="/About">About</a>,
+        content: <a href="/Home">Cuganje</a>,
         active: this.props.active == 2,
       },
-
+      {
+        id: 5,
+        content: <a href="/About/">O nama</a>,
+        active: this.props.active == 3,
+      },
     ];
     const div =
           (
