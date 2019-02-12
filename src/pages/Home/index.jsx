@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import styles from './index.css';
-import { increase, setWord, showPopup, removePopup} from './actions';
+import { setCardEvents, increase, setWord, showPopup, removePopup} from './actions';
 
 import { Button } from 'storybook-project/dist/';
 import { Footer } from 'storybook-project/dist/';
@@ -126,7 +126,7 @@ class Home extends React.Component {
         iconDetails="/icons/info.png"
         onClickFavorites={this.props.increase1}//{() =>{this.addFavorites(beer.id)}}
         onClickCart={() =>{this.addCart(beer.id)}}
-        onClickDetails={() => this.setPopup(beer)}
+        onClickDetails={() =>{ this.setPopup(beer)}}
       />));
       
 
@@ -136,12 +136,20 @@ class Home extends React.Component {
 
     
     return (
-      <div className="home">
-      <Header
+      <div className={styles.main}>
+      <div>
+        <Header
         imgUrl="https://seeklogo.com/images/D/duff-beer-logo-3AA4218F1D-seeklogo.com.png"
         class="" 
         text="Duff Brewery" />
         <Navigation links={page_links} />
+      </div>
+      <div>
+      Favorites : <span>{this.props.number} </span>
+      </div>
+      <div>
+      Shopping cart : <span>{this.props.number}</span>
+      </div>
         <div className={styles.content}>
           <Main>{cards}</Main>
         </div>
