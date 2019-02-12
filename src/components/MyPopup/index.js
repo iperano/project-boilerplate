@@ -25,8 +25,8 @@ export default class MyPopup extends React.Component {
             <hr />
             <div className={style.popupButtonConteiner}>
               {/* <Button onClick={this.props.onClose} text="Zatvori" /> */}
-              <Button onClick={() => { this.props.addCart(this.props.popupBeer.id); }} text="Dodaj u košaricu" />
-              <Button onClick={() => { this.props.addFavorites(this.props.popupBeer.id); }} text="Najdraže pive" />
+              <Button onClick={() => { this.props.addCart(this.props.popupBeer.id); }} text="Add to cart" />
+              <Button onClick={() => { this.props.addFavorites(this.props.popupBeer.id); }} text="Favourites" />
             </div>
           </Popup>
         );

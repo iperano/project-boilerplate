@@ -5,6 +5,10 @@ import styles from './index.css';
 import { increase, setWord } from './actions';
 
 import { Button } from 'storybook-project/dist/';
+import { Footer } from 'storybook-project/dist/';
+import { Header } from 'storybook-project/dist/';
+import { MyFooter } from '../../components/MyFooter/';
+import { MyNavigation } from '../../components/MyNavigation/';
 
 
 const links = [
@@ -26,6 +30,11 @@ const links = [
   {
     id: 4,
     content: <a href="http://linkedin.com"><img border="0" alt="LinkedIn" src="https://cdn3.iconfinder.com/data/icons/picons-social/57/51-linkedin-512.png" width="30" height="30"/></a>,
+    active: true,
+  },
+  {
+    id: 5,
+    content: <a href="http://github.com"><img border="0" alt="Github" src="https://cdn3.iconfinder.com/data/icons/free-social-icons/67/github_circle_black-512.png" width="30" height="30"/></a>,
     active: true,
   },
 ];
@@ -57,8 +66,14 @@ class Home extends React.Component {
   render() {
     return (
       <div className="home">
-        <h1> Hello World! </h1>
-        <Button text="Can't Press me!" disabled={true}></Button>
+      <Header
+        imgUrl="https://seeklogo.com/images/D/duff-beer-logo-3AA4218F1D-seeklogo.com.png"
+        class="" 
+        text="Duff Brewery">
+      </Header>;
+
+        {/* <h1> Hello World! </h1> */}
+        <Button text="Can't Press me!" disabled={false}></Button>
         <span>{this.props.number}</span>
         <button onClick={this.props.increase1}>+1</button>
         <button onClick={this.props.increase100}>+100</button>
@@ -75,7 +90,10 @@ class Home extends React.Component {
         </div>
         <div className={styles.customHome} >
           <Link href="a" to="/about"> Go to About page! </Link>
+          
         </div>
+        <div><Footer links={links} text="Duff Brewery" /></div>
+        
 
       </div>
     );

@@ -12,14 +12,10 @@ export default class MyNavigation extends React.Component {
       },
       {
         id: 2,
-        content: <a href="/Home">Home</a>,
+        content: <a href="/About">About</a>,
         active: this.props.active == 2,
       },
-      {
-        id: 3,
-        content: <a href="/About/">About</a>,
-        active: this.props.active == 3,
-      },
+
     ];
     const div =
           (
@@ -29,6 +25,6 @@ export default class MyNavigation extends React.Component {
   }
 }
 
-BeerNavigation.propTypes = {
+MyNavigation.propTypes = {
   active: PropTypes.integer,
 };
