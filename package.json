@@ -9,6 +9,10 @@
     "watch": "webpack --watch -d",
     "dev": "webpack-dev-server"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iperano/project-boilerplate.git"
+  },
   "author": "Ivan P",
   "license": "ISC",
   "devDependencies": {
